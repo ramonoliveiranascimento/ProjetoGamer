@@ -11,6 +11,10 @@ public class personagem : MonoBehaviour
     bool NoChao = false; /// variavel recebe a funcao detecta chao
     public float ForcaDoPulo; /// variavel recebe funcao e forca do pulo dentro do unity
 
+    public Transform origempoder;
+    public GameObject prefabpoder;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,7 @@ public class personagem : MonoBehaviour
         Movimento();
         Pulo();
         GravidadePulo();
+        Poder();
     }
 
     void Movimento()
@@ -60,14 +65,20 @@ public class personagem : MonoBehaviour
             transform.Translate(Vector2.left * Velocidade * Time.deltaTime);
         }*/
     }
-
+    void Poder()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(prefabpoder, origempoder.position, origempoder.rotation);
+        }
+    }
     /// funcao para pular
     void Pulo()
     {
-        if (Input.GetButton("Jump") && NoChao == true)
+        if (Input.GetButton("Jump") && NoChao == true) // recebe botao precionado 
         {
-            float PosicaoY = ForcaDoPulo + Time.deltaTime;
-            Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY);
+            float PosicaoY = ForcaDoPulo + Time.deltaTime; // define a para pulo
+            Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY); // recebe o resultado do pulo
         }
     }
 
