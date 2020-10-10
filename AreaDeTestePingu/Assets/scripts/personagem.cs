@@ -14,6 +14,11 @@ public class personagem : MonoBehaviour
     public Transform origempoder;
     public GameObject prefabpoder;
 
+    public float volumepassos;
+    public AudioSource passos;
+
+    public float volumepulo;
+    public AudioSource pulo;
 
     // Start is called before the first frame update
     void Start()
@@ -41,17 +46,21 @@ public class personagem : MonoBehaviour
 
         ///transform.position += Vector3.right * hAxis * speed * Time.deltaTime; /// recebe movimentação 
 
-
+        volumepassos = hAxis;
 
         ///ROTACIONAR IMAGENS DO PERSONAGEM
         if (hAxis < 0)
         {
+            volumepassos = hAxis * -1;
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
         else if (hAxis > 0)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
+
+        passos.volume = volumepassos;
+
         ///OUTRA FORMA DE mover
         /*if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -70,6 +79,7 @@ public class personagem : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Instantiate(prefabpoder, origempoder.position, origempoder.rotation);
+
         }
     }
     /// funcao para pular
@@ -79,7 +89,10 @@ public class personagem : MonoBehaviour
         {
             float PosicaoY = ForcaDoPulo + Time.deltaTime; // define a para pulo
             Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY); // recebe o resultado do pulo
+            volumepulo = PosicaoY;
+            
         }
+        pulo.volume = volumepulo;
     }
 
     /// funcao determonar a forca aplicada na gravidade do pulo
