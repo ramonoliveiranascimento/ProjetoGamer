@@ -1433,7 +1433,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -2511,5 +2511,10 @@ PrefabInstance:
       propertyPath: pulo
       value: 
       objectReference: {fileID: 1967203991}
+    - target: {fileID: 2447290151843813415, guid: b2e86591dcd824f47b4156368a3dc944,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2e86591dcd824f47b4156368a3dc944, type: 3}
