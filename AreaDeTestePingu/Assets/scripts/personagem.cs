@@ -17,8 +17,7 @@ public class personagem : MonoBehaviour
     public float volumepassos;
     public AudioSource passos;
 
-    public float volumepulo;
-    public AudioSource pulo;
+    public AudioSource audio_pulo;
 
     // Start is called before the first frame update
     void Start()
@@ -89,22 +88,13 @@ public class personagem : MonoBehaviour
         {
             float PosicaoY = ForcaDoPulo + Time.deltaTime; // define a para pulo
             Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY); // recebe o resultado do pulo
-            volumepulo = PosicaoY;
-            
         }
-        pulo.volume = volumepulo;
     }
 
     /// funcao determonar a forca aplicada na gravidade do pulo
     void GravidadePulo()
     {
         Jogador.AddForce(Vector2.down * ForcaGravidadePulo); /// AddForce adiciona forca
-    }
-
-    /// DETECTA COLISÃO COM OBIJETOS DE FISICOS
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
     }
 
     /// DETECTA COLISÃO COM OS OBIJETOS QUE USAM TRIGGEER E LAYER.
@@ -129,6 +119,7 @@ public class personagem : MonoBehaviour
         if (collision.gameObject.layer == 8)
         {
             NoChao = true;
+            audio_pulo.Stop();
         }
     }
 
@@ -138,6 +129,7 @@ public class personagem : MonoBehaviour
         if (collision.gameObject.layer == 8)
         {
             NoChao = false;
+            audio_pulo.Play();
         }
 
     }
