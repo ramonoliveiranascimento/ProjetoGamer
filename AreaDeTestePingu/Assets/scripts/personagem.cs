@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class personagem : MonoBehaviour
 {
-    public float Velocidade; /// variavel global velocidade
-    public int peixe; /// variavel peixe global
     public Rigidbody2D Jogador; /// variavel personagem jogador
+    public float Velocidade; /// variavel global velocidade
     public float ForcaGravidadePulo; /// variavel para determinar forca do pulo dentro do unity
-    bool NoChao = false; /// variavel recebe a funcao detecta chao
     public float ForcaDoPulo; /// variavel recebe funcao e forca do pulo dentro do unity
+    bool NoChao = false; /// variavel recebe a funcao detecta chao
+
+
+    public Animator Animacao_personagem;
+
+    public int peixe; /// variavel peixe global
 
     public Transform origempoder;
     public GameObject prefabpoder;
@@ -19,10 +23,13 @@ public class personagem : MonoBehaviour
 
     public AudioSource audio_pulo;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
         Jogador = GetComponent<Rigidbody2D>(); /// procura o rigidbody no unity
+        Animacao_personagem = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,10 +59,19 @@ public class personagem : MonoBehaviour
         {
             volumepassos = hAxis * -1;
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            Animacao_personagem.SetBool("parado", false);
+            Animacao_personagem.SetTrigger("andando");
         }
         else if (hAxis > 0)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            Animacao_personagem.SetBool("parado", false);
+            Animacao_personagem.SetTrigger("andando");
+        }
+        else
+        {
+            Animacao_personagem.SetBool("andando",false);
+            Animacao_personagem.SetTrigger("parado");
         }
 
         passos.volume = volumepassos;
@@ -88,6 +104,7 @@ public class personagem : MonoBehaviour
         {
             float PosicaoY = ForcaDoPulo + Time.deltaTime; // define a para pulo
             Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY); // recebe o resultado do pulo
+            Animacao_personagem.SetTrigger("pulando");
         }
     }
 
