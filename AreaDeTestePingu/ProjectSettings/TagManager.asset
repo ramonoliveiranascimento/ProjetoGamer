@@ -6,6 +6,8 @@ TagManager:
   tags:
   - peixe
   - caixavermelha
+  - bomba
+  - urso
   layers:
   - Default
   - TransparentFX

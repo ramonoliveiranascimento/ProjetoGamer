@@ -12,7 +12,7 @@ public class personagem : MonoBehaviour
 
     public float tempo = 0; 
 
-    public Animator Animacao_personagem; // variavel de contato com ferramenta ANIMATOR
+    public Animator Animacao_personagem; /// variavel de contato com ferramenta ANIMATOR
 
     public int peixe; /// variavel peixe global
 
@@ -44,40 +44,40 @@ public class personagem : MonoBehaviour
 
     void Movimento()
     {
-        ///mover
+        // mover
         float hAxis = Input.GetAxis("Horizontal"); /// recebe aperto de tecla
 
         float xPox = hAxis * Velocidade + Time.deltaTime; /// 
 
         Jogador.velocity = new Vector2(xPox, Jogador.velocity.y); /// outra forma de movimentação
 
-        ///transform.position += Vector3.right * hAxis * speed * Time.deltaTime; /// recebe movimentação 
+        /// transform.position += Vector3.right * hAxis * speed * Time.deltaTime; /// recebe movimentação 
 
         volumepassos = hAxis;
 
-        ///ROTACIONAR IMAGENS DO PERSONAGEM
+        /// ROTACIONAR IMAGENS DO PERSONAGEM
         if (hAxis < 0)
         {
             volumepassos = hAxis * -1;
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            Animacao_personagem.SetBool("parado", false); // para animação do personagem parado
-            Animacao_personagem.SetTrigger("andando"); // ATIVA animação do personagem andando
+            Animacao_personagem.SetBool("parado", false); /// para animação do personagem parado
+            Animacao_personagem.SetTrigger("andando"); /// ATIVA animação do personagem andando
         }
         else if (hAxis > 0)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            Animacao_personagem.SetBool("parado", false); // para animação do personagem parado
-            Animacao_personagem.SetTrigger("andando"); // ativa animação do personagem andando
+            Animacao_personagem.SetBool("parado", false); /// para animação do personagem parado
+            Animacao_personagem.SetTrigger("andando"); /// ativa animação do personagem andando
         }
         else
         {
-            Animacao_personagem.SetBool("andando",false); // para animação do personagem andando
-            Animacao_personagem.SetTrigger("parado"); // ativa animação do personagem parado
+            Animacao_personagem.SetBool("andando",false); /// para animação do personagem andando
+            Animacao_personagem.SetTrigger("parado"); /// ativa animação do personagem parado
         }
 
         passos.volume = volumepassos;
 
-        ///OUTRA FORMA DE mover
+        //OUTRA FORMA DE mover
         /*if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.rotation = Quaternion.Euler(new Vector2 ou 3(0,0,0)); - ROTACIONA IMAGEM DO PERSONAGEM
@@ -94,44 +94,46 @@ public class personagem : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            Animacao_personagem.SetTrigger("tiro"); // chama animação do tiro
             Instantiate(prefabpoder, origempoder.position, origempoder.rotation);
-
         }
     }
+
     /// funcao para pular
     void Pulo()
     {
-        if (Input.GetButton("Jump") && NoChao == true) // recebe botao precionado 
+        if (Input.GetButton("Jump") && NoChao == true) /// recebe botao precionado 
         {
-            float PosicaoY = ForcaDoPulo + Time.deltaTime; // define a para pulo
-            Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY); // recebe o resultado do pulo
-            Animacao_personagem.SetBool("parado", false); // para animação do personagem parado
-            Animacao_personagem.SetBool("andando", false); // para animação do personagem andando
-            Animacao_personagem.SetTrigger("pulando"); // ativa a animção do personagem pulando
+            float PosicaoY = ForcaDoPulo + Time.deltaTime; /// define a para pulo
+            Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY); /// recebe o resultado do pulo
+            passos.Stop(); ///PARA O AUDIO PASSOS DURANTE O PULO
+            Animacao_personagem.SetBool("parado", false); /// para animação do personagem parado
+            Animacao_personagem.SetBool("andando", false); /// para animação do personagem andando
+            Animacao_personagem.SetTrigger("pulando"); /// ativa a animção do personagem pulando
         }
     }
 
-    /// funcao determonar a forca aplicada na gravidade do pulo
+    // funcao determonar a forca aplicada na gravidade do pulo
     void GravidadePulo()
     {
         Jogador.AddForce(Vector2.down * ForcaGravidadePulo); /// AddForce adiciona forca
     }
 
-    /// DETECTA COLISÃO COM OS OBIJETOS QUE USAM TRIGGEER E LAYER.
+    // DETECTA COLISÃO COM OS OBIJETOS QUE USAM TRIGGEER E LAYER.
     private void OnTriggerEnter2D(Collider2D collision) /// entrada
     {
         /// detecta colisao com os peixe
         if (collision.tag == "peixe")
         {
             peixe += 2;
-            Destroy(collision.gameObject); // destroi o objeto
+            Destroy(collision.gameObject); /// destroi o objeto
         }
 
         /// detecta colisao com a caixa vermelha
         if (collision.tag == "caixavermelha")
         {
             peixe -= 1;
-            Destroy(collision.gameObject); // destroi o objeto
+            Destroy(collision.gameObject); /// destroi o objeto
 
         }
 
@@ -140,12 +142,13 @@ public class personagem : MonoBehaviour
         {
             NoChao = true;
             audio_pulo.Stop();
+            passos.Play();
             Animacao_personagem.SetBool("pulando", false);
         }
     }
 
-    /// detecta saidas de colisao com objetos e layer
-    private void OnTriggerExit2D(Collider2D collision) // saida
+    // detecta saidas de colisao com objetos e layer
+    private void OnTriggerExit2D(Collider2D collision) /// saida
     {
         if (collision.gameObject.layer == 8)
         {

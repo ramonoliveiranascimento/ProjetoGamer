@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pinguim_caindo
+  m_Name: urso_dano
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 3430989625272130768, guid: e019e206feef4451dbe80e461cfa3a12,
+      value: {fileID: 168829210168659901, guid: 8c665dfa75a9b00449bddee1086ee11b,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -41,7 +41,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 3430989625272130768, guid: e019e206feef4451dbe80e461cfa3a12, type: 3}
+    - {fileID: 168829210168659901, guid: 8c665dfa75a9b00449bddee1086ee11b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
