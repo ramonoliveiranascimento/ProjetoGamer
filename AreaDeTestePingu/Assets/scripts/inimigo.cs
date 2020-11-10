@@ -35,9 +35,13 @@ public class inimigo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(DanoUrso == false)
-            Andar();   
+        if (DanoUrso == false)
+        {
+            Andar();
+        }
+        //else { Controleanimacao("urso_explode"); } daria para colocar aqui direto também.
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (DanoUrso == true && collision.gameObject.layer == 8)
@@ -78,12 +82,12 @@ public class inimigo : MonoBehaviour
         DanoUrso = true;
         if (Direita)
         {
-            Urso.AddForce(new Vector2(1, 1) * ForcaContato);
+            Urso.AddForce(new Vector2(1, 10) * ForcaContato);
             Controleanimacao("urso_dano");
         }
         else
         {
-            Urso.AddForce(new Vector2(-1, 1) * ForcaContato);
+            Urso.AddForce(new Vector2(-1, 10) * ForcaContato);
             Controleanimacao("urso_dano");
         }
     }
