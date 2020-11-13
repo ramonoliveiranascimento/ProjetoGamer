@@ -31,6 +31,7 @@ public class personagem : MonoBehaviour
     {
         Jogador = GetComponent<Rigidbody2D>(); /// procura o rigidbody no unity
         Animacao_personagem = GetComponent<Animator>(); /// procura o ANIMATOR no unity
+        audio_pulo.Stop();
     }
 
     // Update is called once per frame
@@ -107,6 +108,7 @@ public class personagem : MonoBehaviour
             float PosicaoY = ForcaDoPulo + Time.deltaTime; /// define a para pulo
             Jogador.velocity = new Vector2(Jogador.velocity.x, PosicaoY); /// recebe o resultado do pulo
             passos.Stop(); ///PARA O AUDIO PASSOS DURANTE O PULO
+            audio_pulo.Play();
             Animacao_personagem.SetBool("parado", false); /// para animação do personagem parado
             Animacao_personagem.SetBool("andando", false); /// para animação do personagem andando
             Animacao_personagem.SetTrigger("pulando"); /// ativa a animção do personagem pulando
@@ -153,7 +155,7 @@ public class personagem : MonoBehaviour
         if (collision.gameObject.layer == 8)
         {
             NoChao = false;
-            audio_pulo.Play();
+            passos.Stop();
         }
 
     }
